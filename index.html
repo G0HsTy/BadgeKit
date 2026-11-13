@@ -78,9 +78,6 @@ h1 em{font-style:normal;color:#fff}
 .stream .bd{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end;max-width:56%}
 .stream .bd img{height:22px;width:auto;transition:transform .3s var(--ease)}
 .stream:hover .bd img{transform:translateY(-2px) scale(1.06)}
-.tg{display:flex;flex-wrap:wrap;gap:6px}
-.tg button{font-size:12px;padding:6px 10px;border-radius:999px;border:1px solid var(--line);color:var(--muted);transition:.2s}
-.tg button.on{background:#fff;color:#000;border-color:#fff}
 
 footer{margin-top:70px;padding:30px 0 50px;border-top:1px solid var(--line);color:var(--muted);font-size:13px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
 footer a{color:var(--text)}
@@ -187,7 +184,7 @@ ov.addEventListener('mousedown',e=>{if(e.target===ov)closeModal()});
 addEventListener('keydown',e=>{if(ov.classList.contains('show')&&e.key==='Escape')closeModal()});
 
 /* ============================================================
-   LIVE PREVIEW — FIXED
+   LIVE PREVIEW — chips removed
    ============================================================ */
 const SCENARIOS=[
  {t:'Dune.Part.Two.2024.2160p.UHD.BluRay.REMUX.DV.HDR10+.HEVC.TrueHD.7.1.Atmos',s:'Torrentio · 62.4 GB',b:['source-remux','4k','dv-hdr10plus','hevc','atmos','7-1','mkv','rd']},
@@ -197,17 +194,17 @@ const SCENARIOS=[
  {t:'Dune.Part.Two.2024.720p.WEBRip.AAC.2.0.x265',s:'Torrentio · 1.9 GB',b:['source-webrip','720p','hevc','aac','2-0','mp4','debridlink']}
 ];
 
-// Build a global id -> badge map for fast lookup
+// id -> badge map for O(1) lookup
 const BADGE_MAP = new Map(BADGES.map(b=>[b.file.replace('.png',''), b]));
 function find(id){ return BADGE_MAP.get(id); }
 
-// Collect every unique badge id used by any scenario
+// Every unique badge id used across all scenarios
 const ALL_SCENARIO_IDS = [...new Set(SCENARIOS.flatMap(s=>s.b))].filter(id=>!!find(id));
 
-let lp={p:0,on:null,sc:0};
+let lp={p:0,sc:0};
 
 function openLive(p){
-  lp.p=p; lp.on=null; lp.sc=0;
+  lp.p=p; lp.sc=0;
   const html=`
   <div class="mh"><h4>Live preview <span style="color:var(--muted);font-weight:500">· ${esc(PACKS[p].name)}</span></h4><button class="x" aria-label="Close">${ICON.x}</button></div>
   <div class="mb"><div class="lp-r">
@@ -215,47 +212,23 @@ function openLive(p){
       <button class="btn" id="lpShuf" style="flex:none">↻ Shuffle</button>
       <button class="btn primary" id="lpCopy" style="flex:none">${ICON.copy}Copy JSON</button>
     </div>
-    <div class="tg" id="lpTg"></div>
     <div class="streams" id="lpStreams"></div>
   </div></div>`;
   openModal(html,'lp');
-  lpRender(true);
+  lpRender();
 }
 
-function lpRender(reset){
+function lpRender(){
   const p=lp.p;
-
-  // On first render or shuffle, enable ALL scenario badges
-  if(!lp.on || reset) lp.on = new Set(ALL_SCENARIO_IDS);
-
-  // Render filter chips (all scenario badges)
-  $('#lpTg').innerHTML = ALL_SCENARIO_IDS.map(id=>{
-    const b = find(id);
-    if(!b) return '';
-    const available = has(p,b);
-    const on = lp.on.has(id) && available;
-    return `<button data-id="${id}" class="${on?'on':''}" ${available?'':'disabled style="opacity:.35;cursor:not-allowed"'}>${esc(b.name)}</button>`;
-  }).join('');
-
-  $('#lpTg').onclick = e=>{
-    const btn = e.target.closest('button'); if(!btn) return;
-    const id = btn.dataset.id;
-    if(!id) return;
-    if(lp.on.has(id)) lp.on.delete(id); else lp.on.add(id);
-    lpRender(false);
-  };
 
   $('#lpShuf').onclick = ()=>{
     lp.sc = (lp.sc + 1) % SCENARIOS.length;
-    lp.on = null;
-    lpRender(true);
+    lpRender();
   };
   $('#lpCopy').onclick = e=>copy(jsonURL(p),'JSON link copied',e.currentTarget);
 
-  // Render all scenario rows
   $('#lpStreams').innerHTML = SCENARIOS.map((s,idx)=>{
     const imgs = s.b
-      .filter(id=>lp.on.has(id))
       .map(find)
       .filter(b=>b && has(p,b))
       .map(b=>`<img src="${imgURL(p,b)}" alt="${esc(b.name)}">`)
@@ -321,9 +294,9 @@ async function loadPacks(){
     const data=await res.json();
     if(!Array.isArray(data)||!data.length) throw new Error("packs.json: empty or invalid");
     PACKS=data;
-    console.log("Loaded packs from packs.json:",PACKS.length);
+    console.log("✅ Loaded packs from packs.json:",PACKS.length);
   }catch(e){
-    console.warn("packs.json failed, using fallback:",e.message);
+    console.warn("⚠️ packs.json failed, using fallback:",e.message);
     PACKS=FALLBACK_PACKS;
   }
   renderAll();
