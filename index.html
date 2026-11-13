@@ -53,39 +53,6 @@ h1 em{font-style:normal;color:#fff}
 .btn svg{width:15px;height:15px;flex:none}
 .btn.ok{background:#fff!important;color:#000!important;border-color:transparent}
 
-.toolbar{display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin-bottom:14px}
-.seg{display:flex;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:4px;position:relative}
-.seg button{padding:9px 16px;border-radius:10px;font-size:13px;font-weight:600;color:var(--muted);position:relative;z-index:1;transition:color .25s}
-.seg button.on{color:#111}
-.seg .thumb{position:absolute;top:4px;bottom:4px;border-radius:10px;background:var(--text);transition:.35s var(--ease);z-index:0}
-.chips{display:flex;gap:8px;overflow-x:auto;padding:4px 0 14px;scrollbar-width:none}
-.chips::-webkit-scrollbar{display:none}
-.chip{flex:none;padding:7px 13px;border-radius:999px;border:1px solid var(--line);font-size:12.5px;font-weight:500;color:var(--muted);background:var(--card);transition:.25s var(--ease)}
-.chip:hover{color:var(--text);border-color:var(--line2)}
-.chip.on{background:#fff;border-color:#fff;color:#000}
-.chip small{opacity:.6;margin-left:5px}
-
-.bar{display:flex;align-items:center;justify-content:space-between;margin:2px 0 14px;gap:10px;flex-wrap:wrap}
-.bar .info{font-size:13px;color:var(--muted)}
-
-.group-title{display:flex;align-items:center;gap:10px;margin:26px 0 12px;font-size:15px;font-weight:700;letter-spacing:-.01em}
-.group-title span{font-size:12px;font-weight:500;color:var(--muted);border:1px solid var(--line);border-radius:999px;padding:2px 9px}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:12px}
-.card{--rx:0deg;--ry:0deg;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px;display:flex;flex-direction:column;gap:12px;cursor:pointer;text-align:left;position:relative;overflow:hidden;
-  transform:perspective(700px) rotateX(var(--rx)) rotateY(var(--ry));transition:transform .2s ease,border-color .25s,background .25s,box-shadow .3s;opacity:0;translate:0 14px}
-.card.in{opacity:1;translate:0 0;transition:transform .2s ease,border-color .25s,background .25s,box-shadow .3s,opacity .5s var(--ease),translate .5s var(--ease)}
-.card:hover{border-color:var(--line2);background:var(--card2);box-shadow:0 14px 34px rgba(0,0,0,.45)}
-.card::after{content:"";position:absolute;inset:0;background:radial-gradient(220px circle at var(--mx,50%) var(--my,0%),rgba(255,255,255,.09),transparent 60%);opacity:0;transition:.3s;pointer-events:none}
-.card:hover::after{opacity:1}
-.stage{height:78px;border-radius:11px;background:#000;border:1px solid var(--line);display:grid;place-items:center;overflow:hidden}
-.stage.light{background:#e9e9ee}
-.stage img{max-width:84%;max-height:56px;object-fit:contain;transition:transform .4s var(--ease)}
-.card:hover .stage img{transform:scale(1.08)}
-.card .nm{font-size:13.5px;font-weight:600;letter-spacing:-.01em}
-.card .id{font-size:11.5px;color:var(--muted);font-family:ui-monospace,SFMono-Regular,Menlo,monospace;margin-top:2px}
-.card .miss{font-size:11px;color:var(--muted)}
-.empty{padding:60px 0;text-align:center;color:var(--muted)}
-
 .overlay{position:fixed;inset:0;z-index:100;background:rgba(0,0,0,.66);backdrop-filter:blur(10px);display:none;align-items:center;justify-content:center;padding:18px;opacity:0}
 .overlay.show{display:flex;animation:fade .25s forwards}
 @keyframes fade{to{opacity:1}}
@@ -96,15 +63,6 @@ h1 em{font-style:normal;color:#fff}
 .x{width:32px;height:32px;border-radius:10px;display:grid;place-items:center;background:rgba(255,255,255,.06);transition:.2s}
 .x:hover{background:rgba(255,255,255,.14);transform:rotate(90deg)}
 .mb{padding:20px}
-.big{height:220px;border-radius:18px;border:1px solid var(--line);display:grid;place-items:center;position:relative;overflow:hidden;background:#000}
-.big img{max-width:72%;max-height:150px;position:relative;animation:float 4s ease-in-out infinite;filter:drop-shadow(0 18px 24px rgba(0,0,0,.5))}
-@keyframes float{50%{transform:translateY(-8px)}}
-.rows{display:grid;gap:10px;margin-top:16px}
-.row{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px 14px;display:flex;gap:12px;align-items:center;justify-content:space-between}
-.row .k{font-size:11px;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);margin-bottom:4px}
-.row .v{font-size:12.5px;font-family:ui-monospace,Menlo,monospace;color:#d8d8de;word-break:break-all}
-.row .btn{flex:none;min-width:auto;padding:8px 12px}
-.nav2{display:flex;justify-content:space-between;margin-top:16px;gap:8px}
 
 .lp{width:min(720px,100%)}
 .lp .mb{display:block}
@@ -182,7 +140,10 @@ footer a:hover{text-decoration:underline}
 const REPO="nowizzz/BadgeKit", BRANCH="main";
 const RAW=`https://raw.githubusercontent.com/${REPO}/${BRANCH}/`;
 
-
+/* ============================================================
+   STATIC DATA: groups + badges only
+   packs are loaded from packs.json (auto-discovery)
+   ============================================================ */
 const DATA={
   "groups":[{"id":"hero","name":"Hero Badges"},{"id":"editions","name":"Editions & Cuts"},{"id":"source","name":"Release Source"},{"id":"resolution","name":"Resolution"},{"id":"dynamic-range","name":"Dynamic Range & Color"},{"id":"audio-codec","name":"Audio Codecs"},{"id":"video-codec","name":"Video Codecs"},{"id":"containers","name":"Containers"},{"id":"audio-channels","name":"Audio Channels"},{"id":"streaming","name":"Streaming Platforms"},{"id":"debrid","name":"Debrid & Caching"},{"id":"audio-subs","name":"Audio & Subs Flags"}],
   "badges":[{"file":"hero-remux.png","name":"REMUX","group":"hero","pattern":"(?i)\\bremux\\b","missing":[]},{"file":"hero-4k.png","name":"4K Ultra HD","group":"hero","pattern":"(?i)\\b(4k|2160p|uhd|ultra[\\s._-]*hd)\\b","missing":[]},{"file":"hero-dv.png","name":"Dolby Vision","group":"hero","pattern":"(?is)^(?!.*(?:\\bhdr|\\b(dv[\\s._-]?p7|dovi[\\s._-]?p7|profile[\\s._-]?7)\\b|\\b(dv[\\s._-]?p8|dovi[\\s._-]?p8|profile[\\s._-]?8)\\b)).*?\\b(dolby[\\s._-]*vision|dovi|dv)\\b","missing":[]},{"file":"hero-atmos.png","name":"Dolby Atmos","group":"hero","pattern":"(?i)\\b(atmos|dolby[\\s._-]*atmos)\\b","missing":[]},{"file":"hero-cached.png","name":"Cached Stream","group":"hero","pattern":"(?is)^(?!.*(?:\\b(rd|realdebrid|real[\\s._-]*debrid)\\b|(?:\\[ad\\b[^\\]]*\\]|(?<![a-z0-9])ad\\+|\\ball[\\s._-]*debrid\\b)|(?:\\[pm\\b[^\\]]*\\]|(?<![a-z0-9])pm\\+|\\bpremiumize\\b)|(?:\\[tb\\b[^\\]]*\\]|(?<![a-z0-9])tb\\+|\\btorbox\\b)|(?:\\[dl\\b[^\\]]*\\]|(?<![a-z0-9])dl\\+|\\bdebrid[\\s._-]*link|debridlink\\b))).*?\\b(cached|instant|debrid)\\b","missing":[]},{"file":"imax.png","name":"IMAX","group":"editions","pattern":"(?i)\\bimax\\b(?!\\s*enhanced)","missing":[]},{"file":"directors-cut.png","name":"Director's Cut","group":"editions","pattern":"(?i)(?<![a-z0-9])directors?[\\s._-]*cut(?![a-z0-9])","missing":[]},{"file":"extended.png","name":"Extended Edition","group":"editions","pattern":"(?i)(?<![a-z0-9])extended[\\s._-]*(?:cut|edition)(?![a-z0-9])","missing":[]},{"file":"theatrical.png","name":"Theatrical Cut","group":"editions","pattern":"(?i)\\b(theatrical[\\s._-]*(cut|edition)?|thtr)\\b","missing":[]},{"file":"remastered.png","name":"Remastered","group":"editions","pattern":"(?i)\\bremaster(ed)?\\b","missing":[]},{"file":"source-remux.png","name":"REMUX","group":"source","pattern":"(?i)\\bremux\\b","missing":[]},{"file":"source-uhd-bluray.png","name":"UHD Blu-ray","group":"source","pattern":"(?is)^(?!.*\\bremux\\b)(?:(?!(?:\\bweb-?dl\\b|\\bweb-?rip\\b|\\bhdtv\\b|\\b(dvd|dvdrip)\\b|\\btvrip\\b)).)*?\\b(uhd[\\s._-]*blu-?ray|4k[\\s._-]*blu-?ray)\\b","missing":[]},{"file":"source-bluray.png","name":"Blu-ray / BDRip","group":"source","pattern":"(?is)^(?!.*(?:\\bremux\\b|\\b(uhd[\\s._-]*blu-?ray|4k[\\s._-]*blu-?ray)\\b))(?:(?!(?:\\b(uhd[\\s._-]*blu-?ray|4k[\\s._-]*blu-?ray)\\b|\\bweb-?dl\\b|\\bweb-?rip\\b|\\bhdtv\\b|\\b(dvd|dvdrip)\\b|\\btvrip\\b)).)*?\\b(blu-?ray|bdrip|brrip)\\b","missing":[]},{"file":"source-webdl.png","name":"WEB-DL","group":"source","pattern":"(?is)^(?:(?!(?:\\b(uhd[\\s._-]*blu-?ray|4k[\\s._-]*blu-?ray)\\b|\\bweb-?rip\\b|\\bhdtv\\b|\\b(dvd|dvdrip)\\b|\\btvrip\\b|\\b(blu-?ray|bdrip|brrip)\\b)).)*?\\bweb-?dl\\b","missing":[]},{"file":"source-webrip.png","name":"WEBRip","group":"source","pattern":"(?is)^(?:(?!(?:\\b(uhd[\\s._-]*blu-?ray|4k[\\s._-]*blu-?ray)\\b|\\bweb-?dl\\b|\\bhdtv\\b|\\b(dvd|dvdrip)\\b|\\btvrip\\b|\\b(blu-?ray|bdrip|brrip)\\b)).)*?\\bweb-?rip\\b","missing":[]},{"file":"source-hdtv.png","name":"HDTV / DVB","group":"source","pattern":"(?is)^(?:(?!(?:\\b(uhd[\\s._-]*blu-?ray|4k[\\s._-]*blu-?ray)\\b|\\bweb-?dl\\b|\\bweb-?rip\\b|\\b(dvd|dvdrip)\\b|\\btvrip\\b|\\b(blu-?ray|bdrip|brrip)\\b)).)*?\\bhdtv\\b","missing":[]},{"file":"source-dvd.png","name":"DVD / DVDRip","group":"source","pattern":"(?is)^(?:(?!(?:\\b(uhd[\\s._-]*blu-?ray|4k[\\s._-]*blu-?ray)\\b|\\bweb-?dl\\b|\\bweb-?rip\\b|\\bhdtv\\b|\\btvrip\\b|\\b(blu-?ray|bdrip|brrip)\\b)).)*?\\b(dvd|dvdrip)\\b","missing":[]},{"file":"telesync.png","name":"TS","group":"source","pattern":"(?is)^(?!.*(?:(?<![a-z0-9])(?:(?:bd|uhd)?remux|blu[\\s._-]?ray|bdrip|brrip|bdmux|web[\\s._-]?dl(?:mux)?|webdl|web[\\s._-]?rip|dvd[\\s._-]?(?:rip|mux)|dvdrip|hdtv|hd[\\s._-]?tv|tvrip)(?![a-z0-9])|(?<![a-z0-9])(?<!hc[\\s._-]?)(?<!hardcoded[\\s._-]?)hd[\\s._-]?rip(?![a-z0-9])|(?<![a-z0-9])(?:hc[\\s._-]?hd[\\s._-]?rip|hardcoded[\\s._-]?hd[\\s._-]?rip|hardcoded)(?![a-z0-9])|(?<![a-z0-9])(?:screener|dvd[\\s._-]?scr(?:eener)?|(?-i:SCR))(?![a-z0-9])|(?<![a-z0-9])(?:telecine|hd[\\s._-]?tc|(?-i:TC))(?![a-z0-9]))).*?(?<![a-z0-9])(?:telesync|hd[\\s._-]?ts|hdts|pdvd|(?-i:TS))(?![a-z0-9])","missing":[]},{"file":"cam.png","name":"CAM","group":"source","pattern":"(?is)^(?!.*(?:(?<![a-z0-9])(?:(?:bd|uhd)?remux|blu[\\s._-]?ray|bdrip|brrip|bdmux|web[\\s._-]?dl(?:mux)?|webdl|web[\\s._-]?rip|dvd[\\s._-]?(?:rip|mux)|dvdrip|hdtv|hd[\\s._-]?tv|tvrip)(?![a-z0-9])|(?<![a-z0-9])(?<!hc[\\s._-]?)(?<!hardcoded[\\s._-]?)hd[\\s._-]?rip(?![a-z0-9])|(?<![a-z0-9])(?:hc[\\s._-]?hd[\\s._-]?rip|hardcoded[\\s._-]?hd[\\s._-]?rip|hardcoded)(?![a-z0-9])|(?<![a-z0-9])(?:screener|dvd[\\s._-]?scr(?:eener)?|(?-i:SCR))(?![a-z0-9])|(?<![a-z0-9])(?:telecine|hd[\\s._-]?tc|(?-i:TC))(?![a-z0-9])|(?<![a-z0-9])(?:telesync|hd[\\s._-]?ts|hdts|pdvd|(?-i:TS))(?![a-z0-9]))).*?(?<![a-z0-9])(?:camrip|hd[\\s._-]?cam|hdcam|(?-i:CAM))(?![a-z0-9])","missing":[]},{"file":"4k.png","name":"4K UHD","group":"resolution","pattern":"(?is)(?:^(?:(?!\\b(?:4320p|1440p|1080p|720p|576p|480p|360p|240p|144p)\\b).)*?\\b(?:2160p)\\b|^(?!.*\\b(?:4320p|2160p|1440p|1080p|720p|576p|480p|360p|240p|144p)\\b)(?:(?!\\b(?:8k|2k|qhd|fhd|full[\\s._-]*hd)\\b).)*?\\b(?:4k|uhd|ultra[\\s._-]*hd)\\b)","missing":[]},{"file":"1080p.png","name":"1080p FHD","group":"resolution","pattern":"(?is)(?:^(?:(?!\\b(?:4320p|2160p|1440p|720p|576p|480p|360p|240p|144p)\\b).)*?\\b(?:1080p)\\b|^(?!.*\\b(?:4320p|2160p|1440p|1080p|720p|576p|480p|360p|240p|144p)\\b)(?:(?!\\b(?:8k|4k|uhd|ultra[\\s._-]*hd|2k|qhd)\\b).)*?\\b(?:fhd|full[\\s._-]*hd)\\b)","missing":[]},{"file":"720p.png","name":"720p HD","group":"resolution","pattern":"(?is)(?:^(?:(?!\\b(?:4320p|2160p|1440p|1080p|576p|480p|360p|240p|144p)\\b).)*?\\b(?:720p)\\b)","missing":[]},{"file":"480p.png","name":"480p SD","group":"resolution","pattern":"(?is)(?:^(?:(?!\\b(?:4320p|2160p|1440p|1080p|720p|576p|360p|240p|144p)\\b).)*?\\b(?:480p)\\b)","missing":[]},{"file":"dolby-vision.png","name":"Dolby Vision","group":"dynamic-range","pattern":"(?is)^(?!.*(?:\\bhdr|\\b(dv[\\s._-]?p7|dovi[\\s._-]?p7|profile[\\s._-]?7)\\b|\\b(dv[\\s._-]?p8|dovi[\\s._-]?p8|profile[\\s._-]?8)\\b)).*?\\b(dolby[\\s._-]*vision|dovi|dv)\\b","missing":[]},{"file":"dv-p7.png","name":"Dolby Vision P7","group":"dynamic-range","pattern":"(?i)\\b(dv[\\s._-]?p7|dovi[\\s._-]?p7|profile[\\s._-]?7)\\b","missing":[]},{"file":"dv-p8.png","name":"Dolby Vision P8","group":"dynamic-range","pattern":"(?i)\\b(dv[\\s._-]?p8|dovi[\\s._-]?p8|profile[\\s._-]?8)\\b","missing":[]},{"file":"dv-hdr.png","name":"DV + HDR10","group":"dynamic-range","pattern":"(?is)^(?=.*\\b(?:dolby[\\s._-]*vision|dovi|dv)\\b)(?!.*(?<![a-z0-9])(?:hdr10\\+|hdr10[\\s._-]*plus|hdr[\\s._-]*10[\\s._-]*\\+))(?=.*\\bhdr)(?!.*\\b(?:dv[\\s._-]?p7|dovi[\\s._-]?p7|profile[\\s._-]?7|dv[\\s._-]?p8|dovi[\\s._-]?p8|profile[\\s._-]?8)\\b).*","missing":[]},{"file":"dv-hdr10plus.png","name":"DV + HDR10+","group":"dynamic-range","pattern":"(?is)^(?=.*\\b(?:dolby[\\s._-]*vision|dovi|dv)\\b)(?=.*(?<![a-z0-9])(?:hdr10\\+|hdr10[\\s._-]*plus|hdr[\\s._-]*10[\\s._-]*\\+))(?!.*\\b(?:dv[\\s._-]?p7|dovi[\\s._-]?p7|profile[\\s._-]?7|dv[\\s._-]?p8|dovi[\\s._-]?p8|profile[\\s._-]?8)\\b).*","missing":[]},{"file":"hdr10plus.png","name":"HDR10+","group":"dynamic-range","pattern":"(?is)^(?!.*(?:\\b(?:dolby[\\s._-]*vision|dovi|dv)\\b)).*?(?<![a-z0-9])(?:hdr10\\+|hdr10[\\s._-]*plus|hdr[\\s._-]*10[\\s._-]*\\+)","missing":[]},{"file":"hdr10.png","name":"HDR10","group":"dynamic-range","pattern":"(?is)^(?!.*(?:\\b(?:dolby[\\s._-]*vision|dovi|dv)\\b|(?<![a-z0-9])(?:hdr10\\+|hdr10[\\s._-]*plus|hdr[\\s._-]*10[\\s._-]*\\+))).*?\\b(hdr10|hdr[\\s._-]*10)\\b(?!\\s*(?:\\+|plus))","missing":[]},{"file":"hdr.png","name":"HDR","group":"dynamic-range","pattern":"(?is)^(?!.*(?:\\b(?:dolby[\\s._-]*vision|dovi|dv)\\b|(?<![a-z0-9])(?:hdr10\\+|hdr10[\\s._-]*plus|hdr[\\s._-]*10[\\s._-]*\\+)|\\bhlg\\b|\\bhdr[\\s._-]*10)).*?\\bhdr\\b(?!\\s*(?:10|\\+))","missing":[]},{"file":"hlg.png","name":"HLG","group":"dynamic-range","pattern":"(?i)\\bhlg\\b","missing":[]},{"file":"10bit.png","name":"10-Bit Color","group":"dynamic-range","pattern":"(?is)^(?:(?!(?:\\b12[\\s._-]?bit\\b|\\b8[\\s._-]?bit\\b)).)*?\\b(10[\\s._-]?bit|hi10p)\\b","missing":[]},{"file":"sdr.png","name":"SDR","group":"dynamic-range","pattern":"(?i)\\bsdr\\b","missing":[]},{"file":"atmos.png","name":"Dolby Atmos","group":"audio-codec","pattern":"(?is)^(?!.*(?:(?<![a-z0-9])(?:truehd|true[\\s._-]*hd)(?![a-z])|(?<![a-z0-9])(?:ddp|dd\\+|dolby[\\s._-]*digital[\\s._-]*plus|e-?ac-?3)(?![a-z+])|(?<![a-z0-9])ddpa\\d?(?![a-z])|(?<![a-z0-9])(?:dv|dovi|dolby[\\s._-]*vision)(?![a-z0-9]))).*?(?<![a-z0-9])atmos(?![a-z])","missing":[]},{"file":"truehd.png","name":"Dolby TrueHD","group":"audio-codec","pattern":"(?is)^(?!.*(?:(?<![a-z0-9])atmos(?![a-z])|(?<![a-z0-9])ddpa\\d?(?![a-z])|(?<![a-z0-9])(?:dv|dovi|dolby[\\s._-]*vision)(?![a-z0-9]))).*?(?<![a-z0-9])(?:truehd|true[\\s._-]*hd)(?![a-z])","missing":[]},{"file":"ddplus.png","name":"Dolby Digital Plus (DD+)","group":"audio-codec","pattern":"(?is)^(?!.*(?:(?<![a-z0-9])atmos(?![a-z])|(?<![a-z0-9])ddpa\\d?(?![a-z])|(?<![a-z0-9])(?:truehd|true[\\s._-]*hd)(?![a-z])|(?<![a-z0-9])(?:dv|dovi|dolby[\\s._-]*vision)(?![a-z0-9]))).*?(?<![a-z0-9])(?:ddp|dd\\+|dolby[\\s._-]*digital[\\s._-]*plus|e-?ac-?3)(?![a-z+])","missing":[]},{"file":"dd.png","name":"Dolby Digital (AC3)","group":"audio-codec","pattern":"(?is)^(?!.*(?:(?<![a-z0-9])(?:ddp|dd\\+|dolby[\\s._-]*digital[\\s._-]*plus|e-?ac-?3)(?![a-z+])|(?<![a-z0-9])(?:dv|dovi|dolby[\\s._-]*vision)(?![a-z0-9]))).*?(?<![a-z0-9])(?:dd|dolby[\\s._-]*digital|ac-?3)(?![a-z+])","missing":[]},{"file":"dtsx.png","name":"DTS:X","group":"audio-codec","pattern":"(?is)^(?!.*(?:(?<![a-z0-9])dts[\\s._-]*hd(?![a-z])|(?:(?<![a-z0-9])dts[\\s._-]*hd[\\s._-]*(?:ma|master)|(?<![a-z0-9])dts[\\s._-]*ma(?![a-z])|dtshdma))).*?(?<![a-z0-9])dts[\\s._:-]*x(?![a-z0-9])","missing":[]},{"file":"dtshd-ma.png","name":"DTS-HD MA","group":"audio-codec","pattern":"(?is)^(?!.*(?:(?<![a-z0-9])dts[\\s._:-]*x(?![a-z0-9]))).*?(?<![a-z0-9])(?:dts[\\s._-]*hd[\\s._-]*ma|dts[\\s._-]*hd[\\s._-]*master)(?![a-z0-9])","missing":[]},{"file":"dts.png","name":"DTS","group":"audio-codec","pattern":"(?i)\\bdts\\b(?![ \\s._:-]*(hd|x|ma|es|hra))","missing":[]},{"file":"flac.png","name":"FLAC Lossless","group":"audio-codec","pattern":"(?i)\\bflac\\b","missing":[]},{"file":"aac.png","name":"AAC","group":"audio-codec","pattern":"(?i)\\baac\\b","missing":[]},{"file":"opus.png","name":"Opus","group":"audio-codec","pattern":"(?i)\\bopus\\b","missing":[]},{"file":"av1.png","name":"AV1","group":"video-codec","pattern":"(?is)^(?:(?!(?:\\b(vvc|h\\.?266)\\b|\\b(hevc|h\\.?265|x265)\\b|\\b(avc|h\\.?264|x264)\\b|\\b(prores|prores[\\s._-]*(hq|422|4444|proxy))\\b|\\bvp9\\b|\\bvp8\\b|\\bvc-?1\\b|\\bxvid\\b|\\bdivx\\b|\\bmpeg-?4\\b|\\bmpeg-?2\\b|\\bwmv\\b)).)*?\\bav1\\b","missing":[]},{"file":"hevc.png","name":"HEVC / H.265","group":"video-codec","pattern":"(?is)^(?:(?!(?:\\b(vvc|h\\.?266)\\b|\\bav1\\b|\\b(avc|h\\.?264|x264)\\b|\\b(prores|prores[\\s._-]*(hq|422|4444|proxy))\\b|\\bvp9\\b|\\bvp8\\b|\\bvc-?1\\b|\\bxvid\\b|\\bdivx\\b|\\bmpeg-?4\\b|\\bmpeg-?2\\b|\\bwmv\\b)).)*?\\b(hevc|h\\.?265|x265)\\b","missing":[]},{"file":"avc.png","name":"AVC / H.264","group":"video-codec","pattern":"(?is)^(?:(?!(?:\\b(vvc|h\\.?266)\\b|\\bav1\\b|\\b(hevc|h\\.?265|x265)\\b|\\b(prores|prores[\\s._-]*(hq|422|4444|proxy))\\b|\\bvp9\\b|\\bvp8\\b|\\bvc-?1\\b|\\bxvid\\b|\\bdivx\\b|\\bmpeg-?4\\b|\\bmpeg-?2\\b|\\bwmv\\b)).)*?\\b(avc|h\\.?264|x264)\\b","missing":[]},{"file":"vp9.png","name":"VP9","group":"video-codec","pattern":"(?is)^(?:(?!(?:\\b(vvc|h\\.?266)\\b|\\bav1\\b|\\b(hevc|h\\.?265|x265)\\b|\\b(avc|h\\.?264|x264)\\b|\\b(prores|prores[\\s._-]*(hq|422|4444|proxy))\\b|\\bvp8\\b|\\bvc-?1\\b|\\bxvid\\b|\\bdivx\\b|\\bmpeg-?4\\b|\\bmpeg-?2\\b|\\bwmv\\b)).)*?\\bvp9\\b","missing":[]},{"file":"mkv.png","name":"MKV","group":"containers","pattern":"(?is)^(?:(?!(?:\\bmp4\\b|\\b(m2ts|\\.ts\\b)\\b|\\bavi\\b|\\biso\\b)).)*?\\bmkv\\b","missing":[]},{"file":"mp4.png","name":"MP4","group":"containers","pattern":"(?is)^(?:(?!(?:\\bmkv\\b|\\b(m2ts|\\.ts\\b)\\b|\\bavi\\b|\\biso\\b)).)*?\\bmp4\\b","missing":[]},{"file":"7-1.png","name":"7.1 Surround","group":"audio-channels","pattern":"(?i)\\b(7[\\s._-]1|8ch)\\b(?![ \\s._-]*[24])","missing":[]},{"file":"5-1.png","name":"5.1 Surround","group":"audio-channels","pattern":"(?i)\\b(5[\\s._-]1|6ch)\\b(?![ \\s._-]*[24])","missing":[]},{"file":"2-0.png","name":"2.0 Stereo","group":"audio-channels","pattern":"(?i)\\b(2[\\s._-]0|stereo|2ch)\\b","missing":[]},{"file":"netflix.png","name":"Netflix","group":"streaming","pattern":"(?is)(?:(?<![a-z0-9])netflix(?![a-z0-9])|^(?=.*(?<![a-z0-9])(?:web[\\s._-]?dl|web[\\s._-]?rip|webdl|webrip|web)(?![a-z0-9])).*?(?<![a-z0-9])(?:nf)(?![a-z0-9]))","missing":[]},{"file":"prime.png","name":"Prime Video","group":"streaming","pattern":"(?i)\\b(amazon|amzn|prime[\\s._-]*video)\\b","missing":[]},{"file":"appletv.png","name":"Apple TV+","group":"streaming","pattern":"(?i)\\b(apple[\\s._-]*tv\\+?|atvp)\\b","missing":[]},{"file":"disney.png","name":"Disney+","group":"streaming","pattern":"(?is)^(?!.*(?:hotstar)).*?\\b(disney\\+?|dsnp)\\b","missing":[]},{"file":"max.png","name":"Max / HBO Max","group":"streaming","pattern":"(?is)(?:(?<![a-z0-9])(?:hbo[\\s._-]*max|hmax)(?![a-z0-9])|^(?=.*(?<![a-z0-9])(?:web[\\s._-]?dl|web[\\s._-]?rip|webdl|webrip|web)(?![a-z0-9])).*?(?<![a-z0-9])(?:max)(?![a-z0-9]))","missing":[]},{"file":"hulu.png","name":"Hulu","group":"streaming","pattern":"(?i)\\bhulu\\b","missing":[]},{"file":"paramount.png","name":"Paramount+","group":"streaming","pattern":"(?i)\\b(paramount\\+?|pmtp)\\b","missing":[]},{"file":"peacock.png","name":"Peacock","group":"streaming","pattern":"(?is)(?:(?<![a-z0-9])peacock(?![a-z0-9])|^(?=.*(?<![a-z0-9])(?:web[\\s._-]?dl|web[\\s._-]?rip|webdl|webrip|web)(?![a-z0-9])).*?(?<![a-z0-9])(?:pck|pcok)(?![a-z0-9]))","missing":[]},{"file":"youtube.png","name":"YouTube","group":"streaming","pattern":"(?is)(?:(?<![a-z0-9])youtube(?![a-z0-9])|^(?=.*(?<![a-z0-9])(?:web[\\s._-]?dl|web[\\s._-]?rip|webdl|webrip|web)(?![a-z0-9])).*?(?<![a-z0-9])(?:yt)(?![a-z0-9]))","missing":[0]},{"file":"jiohotstar.png","name":"JioHotstar","group":"streaming","pattern":"(?i)\\b(jiohotstar|hotstar|jio[\\s._-]*hotstar)\\b","missing":[]},{"file":"crunchyroll.png","name":"Crunchyroll","group":"streaming","pattern":"(?is)(?:(?<![a-z0-9])crunchyroll(?![a-z0-9])|^(?=.*(?<![a-z0-9])(?:web[\\s._-]?dl|web[\\s._-]?rip|webdl|webrip|web)(?![a-z0-9])).*?(?<![a-z0-9])(?:cr)(?![a-z0-9]))","missing":[]},{"file":"shahid.png","name":"Shahid","group":"streaming","pattern":"(?i)\\bshahid\\b","missing":[]},{"file":"discovery.png","name":"Discovery+","group":"streaming","pattern":"(?i)\\b(discovery\\+|discoveryplus|dscnp)\\b","missing":[]},{"file":"rd.png","name":"Real-Debrid","group":"debrid","pattern":"(?i)(?:\\[rd\\b[^\\]]*\\]|(?<![a-z0-9])rd\\+|(?<![a-z0-9])real[\\s._-]*debrid(?![a-z0-9])|(?<![a-z0-9])realdebrid(?![a-z0-9]))","missing":[]},{"file":"alldebrid.png","name":"AllDebrid","group":"debrid","pattern":"(?i)(?:\\[ad\\b[^\\]]*\\]|(?<![a-z0-9])ad\\+|\\ball[\\s._-]*debrid\\b)","missing":[]},{"file":"premiumize.png","name":"Premiumize","group":"debrid","pattern":"(?i)(?:\\[pm\\b[^\\]]*\\]|(?<![a-z0-9])pm\\+|\\bpremiumize\\b)","missing":[]},{"file":"torbox.png","name":"TorBox","group":"debrid","pattern":"(?i)(?:\\[tb\\b[^\\]]*\\]|(?<![a-z0-9])tb\\+|\\btorbox\\b)","missing":[]},{"file":"debridlink.png","name":"Debrid-Link","group":"debrid","pattern":"(?i)(?:\\[dl\\b[^\\]]*\\]|(?<![a-z0-9])dl\\+|\\bdebrid[\\s._-]*link|debridlink\\b)","missing":[]},{"file":"dual-audio.png","name":"Dual Audio","group":"audio-subs","pattern":"(?i)\\bdual[\\s._-]*audio\\b","missing":[]},{"file":"multi-audio.png","name":"Multi Audio","group":"audio-subs","pattern":"(?i)(?<![a-z0-9])(?:multi[\\s._-]*audios?|multiaudio|multi[\\s._-]*(?:lang(?:uage)?s?|dubs?)(?![a-z0-9])|(?:tri|triple|quad)[\\s._-]*audios?|(?<![0-9])(?<![0-9]\\.)[3-9][\\s._-]*audios?|multi(?![a-z0-9]|[\\s._-]*(?:subs?|subtitles?|cam|core|view|part|plex|verse|track)(?![a-z])))(?![a-z0-9])","missing":[]},{"file":"dubbed.png","name":"Dubbed","group":"audio-subs","pattern":"(?i)\\b(dubbed|dub)\\b","missing":[]},{"file":"original-audio.png","name":"Original Audio","group":"audio-subs","pattern":"(?i)\\boriginal[\\s._-]*audio\\b","missing":[]}]
@@ -190,16 +151,23 @@ const DATA={
 
 const GROUPS=DATA.groups, BADGES=DATA.badges;
 let PACKS=[];
-const FALLBACK_PACKS=[{"name":"Glass","tag":"Frosted · Colored","json":"badges-glass.json","folder":"Badges"},{"name":"White","tag":"Bold · White text","json":"badges-white.json","folder":"Badges-White"},{"name":"Minimal","tag":"Outline · Clean","json":"badges-minimal.json","folder":"Badges-Minimal"},{"name":"Gold","tag":"Luxury · Golden","json":"badges-gold.json","folder":"Badges-Gold"}];
+const FALLBACK_PACKS=[
+  {"name":"Glass","tag":"Frosted · Colored","json":"badges-glass.json","folder":"Badges"},
+  {"name":"White","tag":"Bold · White text","json":"badges-white.json","folder":"Badges-White"},
+  {"name":"Minimal","tag":"Outline · Clean","json":"badges-minimal.json","folder":"Badges-Minimal"},
+  {"name":"Gold","tag":"Luxury · Golden","json":"badges-gold.json","folder":"Badges-Gold"}
+];
 
 const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const imgURL=(p,b)=>RAW+encodeURI(PACKS[p].folder)+"/"+b.file;
 const jsonURL=p=>RAW+encodeURI(PACKS[p].json);
 const has=(p,b)=>!(b.missing||[]).includes(p);
-const ICON={copy:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>',
- play:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 3l14 9-14 9V3z"/></svg>',
- x:'<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg>'};
+const ICON={
+  copy:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>',
+  play:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 3l14 9-14 9V3z"/></svg>',
+  x:'<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg>'
+};
 
 let tt;
 function toast(t){const el=$('#toast');$('#toastT').textContent=t;el.classList.add('show');clearTimeout(tt);tt=setTimeout(()=>el.classList.remove('show'),1800)}
@@ -218,51 +186,109 @@ function closeModal(){ov.classList.remove('show');document.body.style.overflow='
 ov.addEventListener('mousedown',e=>{if(e.target===ov)closeModal()});
 addEventListener('keydown',e=>{if(ov.classList.contains('show')&&e.key==='Escape')closeModal()});
 
-/* ---------- live preview ---------- */
+/* ============================================================
+   LIVE PREVIEW — FIXED
+   ============================================================ */
 const SCENARIOS=[
  {t:'Dune.Part.Two.2024.2160p.UHD.BluRay.REMUX.DV.HDR10+.HEVC.TrueHD.7.1.Atmos',s:'Torrentio · 62.4 GB',b:['source-remux','4k','dv-hdr10plus','hevc','atmos','7-1','mkv','rd']},
  {t:'Dune.Part.Two.2024.2160p.NF.WEB-DL.DDP5.1.Atmos.DV.HEVC',s:'Torrentio · 21.8 GB',b:['source-webdl','4k','dolby-vision','hevc','atmos','5-1','netflix','torbox']},
  {t:'Dune.Part.Two.2024.1080p.BluRay.x264.DTS-HD.MA.5.1',s:'Torrentio · 14.2 GB',b:['source-bluray','1080p','avc','dtshd-ma','5-1','mkv','alldebrid']},
  {t:'Dune.Part.Two.2024.1080p.AMZN.WEB-DL.DDP5.1.H.264.Dual.Audio',s:'Torrentio · 6.1 GB',b:['source-webdl','1080p','avc','ddplus','dual-audio','prime','premiumize']},
- {t:'Dune.Part.Two.2024.720p.WEBRip.AAC.2.0.x265',s:'Torrentio · 1.9 GB',b:['source-webrip','720p','hevc','aac','2-0','mp4','debridlink']},
+ {t:'Dune.Part.Two.2024.720p.WEBRip.AAC.2.0.x265',s:'Torrentio · 1.9 GB',b:['source-webrip','720p','hevc','aac','2-0','mp4','debridlink']}
 ];
+
+// Build a global id -> badge map for fast lookup
+const BADGE_MAP = new Map(BADGES.map(b=>[b.file.replace('.png',''), b]));
+function find(id){ return BADGE_MAP.get(id); }
+
+// Collect every unique badge id used by any scenario
+const ALL_SCENARIO_IDS = [...new Set(SCENARIOS.flatMap(s=>s.b))].filter(id=>!!find(id));
+
 let lp={p:0,on:null,sc:0};
-function find(id){return BADGES.find(b=>b.file.replace('.png','')===id)}
+
 function openLive(p){
-  lp.p=p;lp.on=null;lp.sc=0;
+  lp.p=p; lp.on=null; lp.sc=0;
   const html=`
   <div class="mh"><h4>Live preview <span style="color:var(--muted);font-weight:500">· ${esc(PACKS[p].name)}</span></h4><button class="x" aria-label="Close">${ICON.x}</button></div>
   <div class="mb"><div class="lp-r">
-    <div class="ctl"><button class="btn" id="lpShuf" style="flex:none">↻ Shuffle</button><button class="btn primary" id="lpCopy" style="flex:none">${ICON.copy}Copy JSON</button></div>
+    <div class="ctl">
+      <button class="btn" id="lpShuf" style="flex:none">↻ Shuffle</button>
+      <button class="btn primary" id="lpCopy" style="flex:none">${ICON.copy}Copy JSON</button>
+    </div>
     <div class="tg" id="lpTg"></div>
     <div class="streams" id="lpStreams"></div>
   </div></div>`;
   openModal(html,'lp');
   lpRender(true);
 }
-function lpRender(first){
-  const p=lp.p, sc=SCENARIOS[lp.sc];
-  const all=[...new Set(sc.b)];
-  if(!lp.on||first)lp.on=new Set(all);
-  $('#lpTg').innerHTML=all.map(id=>{const b=find(id);return `<button data-id="${id}" class="${lp.on.has(id)?'on':''}">${esc(b.name)}</button>`}).join('');
-  $('#lpTg').onclick=e=>{const b=e.target.closest('button');if(!b)return;lp.on.has(b.dataset.id)?lp.on.delete(b.dataset.id):lp.on.add(b.dataset.id);lpRender()};
-  $('#lpShuf').onclick=()=>{lp.sc=(lp.sc+1)%SCENARIOS.length;lp.on=null;lpRender(true)};
-  $('#lpCopy').onclick=e=>copy(jsonURL(p),'JSON link copied',e.currentTarget);
-  const mk=ids=>ids.filter(id=>lp.on.has(id)).map(find).filter(b=>has(p,b)).map(b=>`<img src="${imgURL(p,b)}" alt="${esc(b.name)}">`).join('');
-  $('#lpStreams').innerHTML=SCENARIOS.map((s,i)=>{
-    return `<div class="stream" style="animation-delay:${i*70}ms;${i===lp.sc?'border-color:rgba(255,255,255,.7)':''}"><div class="t"><b>${esc(s.t)}</b><span>${esc(s.s)}</span></div><div class="bd">${mk(s.b)}</div></div>`}).join('');
+
+function lpRender(reset){
+  const p=lp.p;
+
+  // On first render or shuffle, enable ALL scenario badges
+  if(!lp.on || reset) lp.on = new Set(ALL_SCENARIO_IDS);
+
+  // Render filter chips (all scenario badges)
+  $('#lpTg').innerHTML = ALL_SCENARIO_IDS.map(id=>{
+    const b = find(id);
+    if(!b) return '';
+    const available = has(p,b);
+    const on = lp.on.has(id) && available;
+    return `<button data-id="${id}" class="${on?'on':''}" ${available?'':'disabled style="opacity:.35;cursor:not-allowed"'}>${esc(b.name)}</button>`;
+  }).join('');
+
+  $('#lpTg').onclick = e=>{
+    const btn = e.target.closest('button'); if(!btn) return;
+    const id = btn.dataset.id;
+    if(!id) return;
+    if(lp.on.has(id)) lp.on.delete(id); else lp.on.add(id);
+    lpRender(false);
+  };
+
+  $('#lpShuf').onclick = ()=>{
+    lp.sc = (lp.sc + 1) % SCENARIOS.length;
+    lp.on = null;
+    lpRender(true);
+  };
+  $('#lpCopy').onclick = e=>copy(jsonURL(p),'JSON link copied',e.currentTarget);
+
+  // Render all scenario rows
+  $('#lpStreams').innerHTML = SCENARIOS.map((s,idx)=>{
+    const imgs = s.b
+      .filter(id=>lp.on.has(id))
+      .map(find)
+      .filter(b=>b && has(p,b))
+      .map(b=>`<img src="${imgURL(p,b)}" alt="${esc(b.name)}">`)
+      .join('');
+    const highlight = idx===lp.sc;
+    return `<div class="stream" style="animation-delay:${idx*70}ms;${highlight?'border-color:rgba(255,255,255,.7)':''}">
+      <div class="t"><b>${esc(s.t)}</b><span>${esc(s.s)}</span></div>
+      <div class="bd">${imgs}</div>
+    </div>`;
+  }).join('');
 }
 
-
+/* ============================================================
+   RENDER AFTER PACKS LOAD
+   ============================================================ */
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12});
 function observe(){$$('.rv:not(.in)').forEach(el=>io.observe(el))}
 
 function renderAll(){
+  // Stats
   $('#stats').innerHTML=[[BADGES.length,'Badges'],[PACKS.length,'Styles'],[GROUPS.length,'Categories']].map(([n,l])=>`<div class="stat"><b data-n="${n}">0</b><span>${l}</span></div>`).join('');
-  $$('.stat b').forEach(b=>{const n=+b.dataset.n;let i=0;const s=performance.now();(function f(t){const p=Math.min(1,(t-s)/900);b.textContent=Math.round(n*(1-Math.pow(1-p,3)));if(p<1)requestAnimationFrame(f)})(s)});
+  $$('.stat b').forEach(b=>{
+    const n=+b.dataset.n; const s=performance.now();
+    (function f(t){
+      const p=Math.min(1,(t-s)/900);
+      b.textContent=Math.round(n*(1-Math.pow(1-p,3)));
+      if(p<1) requestAnimationFrame(f);
+    })(s);
+  });
 
+  // Pack cards
   function marqueeImgs(p,ids){
-    const list=ids.map(id=>BADGES.find(b=>b.file.replace('.png','')===id)).filter(b=>b&&has(p,b));
+    const list=ids.map(id=>find(id)).filter(b=>b&&has(p,b));
     return [...list,...list].map(b=>`<img loading="lazy" src="${imgURL(p,b)}" alt="">`).join('');
   }
   $('#packsEl').innerHTML=PACKS.map((pk,i)=>{
@@ -274,14 +300,20 @@ function renderAll(){
       <div class="actions">
         <button class="btn primary" data-act="copy" data-p="${i}">${ICON.copy}Copy JSON link</button>
         <button class="btn" data-act="live" data-p="${i}">${ICON.play}Live preview</button>
-      </div></article>`}).join('');
+      </div></article>`;
+  }).join('');
   $('#packsEl').addEventListener('click',e=>{
-    const b=e.target.closest('button[data-act]');if(!b)return;const p=+b.dataset.p;
-    if(b.dataset.act==='copy')copy(jsonURL(p),'JSON link copied',b);
-    if(b.dataset.act==='live')openLive(p);
+    const btn=e.target.closest('button[data-act]'); if(!btn) return;
+    const p=+btn.dataset.p;
+    if(btn.dataset.act==='copy') copy(jsonURL(p),'JSON link copied',btn);
+    if(btn.dataset.act==='live') openLive(p);
   });
   observe();
 }
+
+/* ============================================================
+   AUTO-DISCOVERY: packs.json -> fallback
+   ============================================================ */
 async function loadPacks(){
   try{
     const res=await fetch(RAW+"packs.json?t="+Date.now(),{cache:"no-store"});
@@ -289,9 +321,9 @@ async function loadPacks(){
     const data=await res.json();
     if(!Array.isArray(data)||!data.length) throw new Error("packs.json: empty or invalid");
     PACKS=data;
-    console.log("✅ Loaded packs from packs.json:",PACKS.length);
+    console.log("Loaded packs from packs.json:",PACKS.length);
   }catch(e){
-    console.warn("⚠️ packs.json failed, using fallback:",e.message);
+    console.warn("packs.json failed, using fallback:",e.message);
     PACKS=FALLBACK_PACKS;
   }
   renderAll();
