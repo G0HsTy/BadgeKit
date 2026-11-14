@@ -3,5 +3,5 @@
   {"name":"White","tag":"Bold · White text","json":"badges-white.json","folder":"Badges-White"},
   {"name":"Minimal","tag":"Outline · Clean","json":"Badges-Minimal.json","folder":"Badges-Minimal"},
   {"name":"Gold","tag":"Luxury · Golden","json":"Badges-Gold.json","folder":"Badges-Gold"}
-  {"name":"Neon","tag":"Electric","json":"badges-neon.json","folder":"Badges-Neon"}
+  {"name":"Neon","tag":"Neon · New","json":"badges-neon.json","folder":"Badges-Neon"}
 ]
